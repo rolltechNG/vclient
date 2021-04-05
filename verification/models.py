@@ -9,8 +9,13 @@ from datetime import datetime
 import random
 import base64
 from multiselectfield import MultiSelectField
+from datetime import date
+
 
 # Create your models here.
+
+
+
 
 
 class Credential(models.Model):
@@ -23,6 +28,10 @@ class Credential(models.Model):
 
     def __str__(self):
         return "Verification Credential"
+
+    class Meta:
+        verbose_name = "NIMC eNVS Credential"
+        verbose_name_plural = "NIMC eNVS Credential"
 
 
 class AccessToken(models.Model):
@@ -38,7 +47,7 @@ class AccessToken(models.Model):
     active = models.BooleanField(default=False)
     access_type = MultiSelectField(
         choices=ACCESS_OPTIONS,  blank=True, null=True)
-    #readonly_fields = ('token',)
+    # readonly_fields = ('token',)
 
     # class ReadonlyMeta:
     #     readonly = ["token"]
@@ -58,7 +67,7 @@ class AccessToken(models.Model):
 
 
 class VerificationLogs(models.Model):
-    #user = models.OneToManyFields(User, on_delete=models.CASCADE)
+    # user = models.OneToManyFields(User, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     request_type = models.CharField(max_length=5000, blank=True)
@@ -70,6 +79,16 @@ class VerificationLogs(models.Model):
 
     def __str__(self):
         return self.user.id
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    class Meta:
+        verbose_name = "Verification Log"
+        verbose_name_plural = "Verification Logs"
 
 
 class Unit(models.Model):
@@ -91,7 +110,12 @@ class Unit(models.Model):
     direction = models.CharField(
         choices=DIRECTIONS,  blank=True, null=True, default='credit', max_length=100, editable=False)
 
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
     exclude = ['direction']
 
+    # def __str__(self):
+    #     return self.user.username + "|" + self.direction + "|" + str(self.id)
     def __str__(self):
-        return self.user.username
+        return str(self.id) + "("+self.user.username + "," + str(self.direction)+")"
