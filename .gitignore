@@ -120,7 +120,6 @@ celerybeat.pid
 
 # Environments
 .env
-vclient/
 .venv
 env/
 venv/
@@ -154,3 +153,4 @@ dmypy.json
 .prof
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+/vclient/
