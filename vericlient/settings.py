@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'verification',
     'django_readonly_field',
+    'frontend',  # web interface
 
     # 'accounts',
 
@@ -98,7 +99,7 @@ ROOT_URLCONF = 'vericlient.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(BASE_DIR.joinpath("templates"))],
+        'DIRS': [str(BASE_DIR.joinpath("frontend/templates"))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
