@@ -20,19 +20,21 @@
         <th>Birth Country</th>
         <th>NIN</th>
         <th>Tracking ID</th>
-        {#        <th>Tracking ID</th>#}
+        <th>Picture</th>
+        <th>Signature</th>
     </tr>
     </thead>
     <tbody>
     {% for val in resp %}
         <tr>
-            <th>{{ val.id }}</th>
             <td>{{ val.surname }}</td>
+            <td>{{ val.birthdate }}</td>
             <td>{{ val.telephone }}</td>
             <td>{{ val.residence_address.address_line1 }}</td>
             <td>{{ val.birthstate }}</td>
             <td>{{ val.birthcountry }}</td>
             <td>{{ val.nin }}</td>
+            <td>{{ val.tracking_id }}</td>
         </tr>
     {% endfor %}
 
