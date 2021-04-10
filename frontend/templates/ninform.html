@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <head>
-    <title>HTML and CSS "Hello World"</title
+    <title>HTML and CSS "Hello World"</title>
 </head>
 <body>
 <h1>Verify NIN</h1>
-<form action="" method="post">
+<form action="{% url 'frontend:post_nin' %}" method="POST">
     <table>
         {{ form.as_table }}
         <tr>
