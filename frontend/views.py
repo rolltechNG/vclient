@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from frontend.forms import NINPostForm, PhonePostForm
+from frontend.forms import NINPostForm, PhonePostForm, DemoPostForm
 
 
 class Home(TemplateView):
@@ -60,21 +60,25 @@ def post_phone(request):
 
 def post_demo(request):
     if request.method == 'POST':
-        form = NINPostForm(request.POST)
+        form = DemoPostForm(request.POST)
         if form.is_valid():
-            nin = form.cleaned_data['nin']
-            url = request.build_absolute_uri(reverse_lazy('nin_verification',
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            dob = form.cleaned_data['dob']
+            url = request.build_absolute_uri(reverse_lazy('demo_verification',
                                                           kwargs={'token': 14499009348927979530087,
-                                                                  'nin': nin},
+                                                                  'firstname': firstname,
+                                                                  'lastname': lastname,
+                                                                  'dob': dob, }
                                                           ))
             r = requests.get(url=url)
             resp = r.text
             final_resp = json.loads(resp)
             resp_list = final_resp['data']
 
-            return render(request, 'ninsuccess.html', {'resp': resp_list})
+            return render(request, 'demosuccess.html', {'response': resp_list})
     else:
-        form = NINPostForm()
+        form = DemoPostForm()
     context = {'form': form, }
 
-    return render(request, 'ninform.html', context)
+    return render(request, 'demoform.html', context)

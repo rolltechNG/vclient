@@ -33,13 +33,16 @@ class PhonePostForm(forms.Form):
 
 class DemoPostForm(forms.Form):
     """Form for a user to verify Demo"""
-    nin = forms.CharField(required=True, help_text='e.g. 123xxxxxxxx')
+    firstname = forms.CharField(required=True, help_text='e.g. John')
+    lastname = forms.CharField(required=True, help_text='e.g. Doe')
+    dob = forms.CharField(required=True, help_text='The format must be: dd-mm-yyyy')
 
     # check if the nin is a valid one
-    def clean_nin(self):
-        nin = self.cleaned_data['nin']
-        regex = re.compile("^[0-9]{11}$")
-        if not regex.match(nin):
-            raise forms.ValidationError("NIN is incorrect.")
+    def clean_dob(self):
+        dob = self.cleaned_data['dob']
+        regex = re.compile(
+            "(^((((0[1-9])|([1-2][0-9])|(3[0-1]))|([1-9]))-(((0[1-9])|(1[0-2]))|([1-9]))-(([0-9]{2})|(((19)|([2]([0]{1})))([0-9]{2}))))$)")
+        if not regex.match(dob):
+            raise forms.ValidationError("DOB is incorrect.")
 
-        return nin
+        return dob
