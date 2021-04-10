@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DigitalOcean Droplets</title>
+    <link crossorigin="anonymous"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+          integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4="
+          rel="stylesheet"/>
+</head>
+<body>
+<table class="table is-fullwidth is-striped is-bordered">
+    <thead>
+    <tr>
+        <th>Full Name</th>
+        <th>Date of Birth</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Birth State</th>
+        <th>Birth Country</th>
+        <th>NIN</th>
+        <th>Tracking ID</th>
+        {#        <th>Tracking ID</th>#}
+    </tr>
+    </thead>
+    <tbody>
+    {% for val in resp %}
+        <tr>
+            <th>{{ val.id }}</th>
+            <td>{{ val.surname }}</td>
+            <td>{{ val.telephone }}</td>
+            <td>{{ val.residence_address.address_line1 }}</td>
+            <td>{{ val.birthstate }}</td>
+            <td>{{ val.birthcountry }}</td>
+            <td>{{ val.nin }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>
