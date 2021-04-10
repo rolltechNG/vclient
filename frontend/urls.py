@@ -7,5 +7,6 @@ app_name = 'frontend'
 
 urlpatterns = [
     path('', Home.as_view(), name="home"),
-    path('verify/nin/', views.post_nin, name='post_nin')
+    path('verify/nin/', views.post_nin, name='post_nin'),
+    path('verify/phone/', views.post_phone, name='post_phone')
 ]

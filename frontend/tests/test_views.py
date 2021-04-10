@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 
 class NinViewTest(TestCase):
@@ -8,3 +9,7 @@ class NinViewTest(TestCase):
         response = self.client.get('/verify/nin/')
         self.assertEqual(response.status_code, 200)
         print('\n=====================================================')
+
+    def test_view_url_accessible_by_name(self):
+        response = self.client.get(reverse('frontend:post_nin'))
+        self.assertEqual(response.status_code, 200)
