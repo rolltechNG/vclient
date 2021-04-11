@@ -9,6 +9,23 @@ from django.views.generic import TemplateView
 from frontend.forms import NINPostForm, PhonePostForm, DemoPostForm
 
 
+def process_resp(r):
+    try:
+        resp = r.text
+        resp_json = json.loads(resp)
+        resp_list = resp_json['data']
+        for key in resp_list:
+            img_decode = key['photo']
+            signature_decode = key['signature']
+            key['photo'] = f"data:image/png;base64,{img_decode}"
+            key['signature'] = f"data:image/png;base64,{signature_decode}"
+        response = key
+
+        return response
+    except TypeError:
+        return "", 404
+
+
 class Home(TemplateView):
     template_name = "hello-world.html"
 
@@ -23,15 +40,7 @@ def post_nin(request):
                                                                   'nin': nin},
                                                           ))
             r = requests.get(url=url)
-            resp = r.text
-            resp_json = json.loads(resp)
-            resp_list = resp_json['data']
-            for key in resp_list:
-                img_decode = key['photo']
-                signature_decode = key['signature']
-                key['photo'] = f"data:image/png;base64,{img_decode}"
-                key['signature'] = f"data:image/png;base64,{signature_decode}"
-            response = key
+            response = process_resp(r)
 
             return render(request, 'ninsuccess.html', {'response': response})
     else:
@@ -51,15 +60,7 @@ def post_phone(request):
                                                                   'phone': phone_number},
                                                           ))
             r = requests.get(url=url)
-            resp = r.text
-            resp_json = json.loads(resp)
-            resp_list = resp_json['data']
-            for key in resp_list:
-                img_decode = key['photo']
-                signature_decode = key['signature']
-                key['photo'] = f"data:image/png;base64,{img_decode}"
-                key['signature'] = f"data:image/png;base64,{signature_decode}"
-            response = key
+            response = process_resp(r)
 
             return render(request, 'phonesuccess.html', {'response': response})
     else:
@@ -83,15 +84,7 @@ def post_demo(request):
                                                                   'dob': dob, }
                                                           ))
             r = requests.get(url=url)
-            resp = r.text
-            resp_json = json.loads(resp)
-            resp_list = resp_json['data']
-            for key in resp_list:
-                img_decode = key['photo']
-                signature_decode = key['signature']
-                key['photo'] = f"data:image/png;base64,{img_decode}"
-                key['signature'] = f"data:image/png;base64,{signature_decode}"
-            response = key
+            response = process_resp(r)
 
             return render(request, 'demosuccess.html', {'response': response})
     else:
