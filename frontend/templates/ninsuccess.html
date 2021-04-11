@@ -25,18 +25,18 @@
     </tr>
     </thead>
     <tbody>
-    {% for val in response %}
-        <tr>
-            <td>{{ val.surname }}</td>
-            <td>{{ val.birthdate }}</td>
-            <td>{{ val.telephone }}</td>
-            <td>{{ val.residence_address.address_line1 }}</td>
-            <td>{{ val.birthstate }}</td>
-            <td>{{ val.birthcountry }}</td>
-            <td>{{ val.nin }}</td>
-            <td>{{ val.tracking_id }}</td>
-        </tr>
-    {% endfor %}
+    <tr>
+        <td>{{ response.surname }}</td>
+        <td>{{ response.birthdate }}</td>
+        <td>{{ response.telephone }}</td>
+        <td>{{ response.residence_address.address_line1 }}</td>
+        <td>{{ response.birthstate }}</td>
+        <td>{{ response.birthcountry }}</td>
+        <td>{{ response.nin }}</td>
+        <td>{{ response.tracking_id }}</td>
+        <td><img src="{{ response.photo }}" alt="nin_image"></td>
+        <td><img src="{{ response.signature }}" alt="nin_image"></td>
+    </tr>
 
     </tbody>
 </table>

@@ -26,8 +26,14 @@ def post_nin(request):
             resp = r.text
             resp_json = json.loads(resp)
             resp_list = resp_json['data']
+            for key in resp_list:
+                img_decode = key['photo']
+                signature_decode = key['signature']
+                key['photo'] = f"data:image/png;base64,{img_decode}"
+                key['signature'] = f"data:image/png;base64,{signature_decode}"
+            response = key
 
-            return render(request, 'ninsuccess.html', {'response': resp_list})
+            return render(request, 'ninsuccess.html', {'response': response})
     else:
         form = NINPostForm()
     context = {'form': form, }
@@ -48,9 +54,14 @@ def post_phone(request):
             resp = r.text
             resp_json = json.loads(resp)
             resp_list = resp_json['data']
-            print(resp_list)
+            for key in resp_list:
+                img_decode = key['photo']
+                signature_decode = key['signature']
+                key['photo'] = f"data:image/png;base64,{img_decode}"
+                key['signature'] = f"data:image/png;base64,{signature_decode}"
+            response = key
 
-            return render(request, 'phonesuccess.html', {'response': resp_list})
+            return render(request, 'phonesuccess.html', {'response': response})
     else:
         form = PhonePostForm()
     context = {'form': form, }
@@ -73,10 +84,16 @@ def post_demo(request):
                                                           ))
             r = requests.get(url=url)
             resp = r.text
-            final_resp = json.loads(resp)
-            resp_list = final_resp['data']
+            resp_json = json.loads(resp)
+            resp_list = resp_json['data']
+            for key in resp_list:
+                img_decode = key['photo']
+                signature_decode = key['signature']
+                key['photo'] = f"data:image/png;base64,{img_decode}"
+                key['signature'] = f"data:image/png;base64,{signature_decode}"
+            response = key
 
-            return render(request, 'demosuccess.html', {'response': resp_list})
+            return render(request, 'demosuccess.html', {'response': response})
     else:
         form = DemoPostForm()
     context = {'form': form, }
