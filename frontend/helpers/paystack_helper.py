@@ -3,8 +3,12 @@ Helper function to process paystack transactions
 Gotten from https://github.com/Chibuzor-IN/python-paystack
 """
 from frontend.models import Price
-price = Price.objects.query
-NIN_PRICE = Price.objects.get(id=1)
+from python_paystack.objects.transactions import Transaction
+from python_paystack.managers import Transaction
+
+NIN_PRICE = Price.nin_price
+PHONE_PRICE = Price.phone_price
+DEMO_PRICE = Price.demo_price
 
 
 # PHONE_PRICE =
@@ -12,6 +16,6 @@ NIN_PRICE = Price.objects.get(id=1)
 # EMAIL = {user's email}
 
 def process_transaction():
-    # transaction = Transaction(nin_price, '{EMAIL}')
+    transaction = Transaction(NIN_PRICE, '{EMAIL}')
     # transaction = transaction_manager.initialize_transaction('STANDARD', transaction)
     pass
