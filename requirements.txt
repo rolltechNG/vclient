@@ -13,16 +13,20 @@ django-filter==2.4.0
 django-multiselectfield==0.1.12
 django-readonly-field==1.0.5
 djangorestframework==3.12.2
+future==0.18.2
 idna==2.10
 isodate==0.6.0
 jsonpickle==2.0.0
 lxml==4.6.2
 Markdown==3.3.4
 oauthlib==3.1.0
+Paperboy==1.0.1
 psycopg2==2.8.6
 psycopg2-binary==2.8.6
 pycparser==2.20
 PyJWT==2.0.1
+-e git+https://github.com/gbozee/pypaystack.git@24df1c9ca209031e0ec940ff8552d45ca6b55421#egg=pypaystack
+python-dateutil==2.8.1
 python3-openid==3.2.0
 pytz==2021.1
 requests==2.25.1
