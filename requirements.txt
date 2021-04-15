@@ -25,7 +25,6 @@ psycopg2==2.8.6
 psycopg2-binary==2.8.6
 pycparser==2.20
 PyJWT==2.0.1
--e git+https://github.com/gbozee/pypaystack.git@24df1c9ca209031e0ec940ff8552d45ca6b55421#egg=pypaystack
 python-dateutil==2.8.1
 python3-openid==3.2.0
 pytz==2021.1
