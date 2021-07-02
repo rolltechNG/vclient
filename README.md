@@ -1,4 +1,5 @@
-This is a NIMC Verification client which is built on python and enable users make verification request.
+This is a NIMC Verification client which is built on python-django and enable users make verification request.
+This also have an admin modules to enable administration of account
 
 To make a request, you ll be issued a client token
 
